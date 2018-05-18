@@ -1,0 +1,133 @@
+
+
+#include "graphics.h"
+#include <stdlib.h>
+#include <time.h>
+#include <stdio.h>
+#include <cmath>
+
+using namespace std;
+
+class Point{
+	public:
+		Point();
+		Point(const Point &p);
+		Point( int _x, int _y);
+		Point( int _x, int _y, int _color);
+		int x;
+		int y;
+		int color = WHITE;
+		void draw();
+		void hide();
+		void setColor(int _color);
+};
+
+Point::Point( int _x, int _y){
+	x = _x;
+	y = _y;
+	
+}
+
+Point::Point(const Point &p){
+	x = p.x;
+	y = p.y;
+	color = p.color;
+}
+
+Point::Point( int _x, int _y, int _color){
+	x = _x;
+	y = _y;
+	color = _color;
+}
+
+void Point::draw(){
+	putpixel(x, y, color);
+}
+
+void Point::hide(){
+	putpixel(x, y, BLACK);
+}
+
+void Point::setColor(int _color){
+	color = _color;
+	this->draw();
+}
+
+class Line:public Point{
+	public:
+		int x2; 
+		int y2;
+		Line() : Point(){};
+		Line(int _x1, int _y1, int _x2, int _y2) : Point(_x1, _y1){
+			x2 = _x2;
+			y2 = _y2;
+		}
+		
+		Line(Point p, int _x2, int _y2) : Point(p){
+			x2 = _x2;
+			y2 = _y2;
+		}
+		
+		Line(int _x1, int _y1, int _x2, int _y2, int _color) : Point(_x1, _y1, _color){
+			x2 = _x2;
+			y2 = _y2;
+		}
+		
+		void draw();
+		void hide();
+		void rotate(int angle);
+};
+
+void Line::draw(){
+	setcolor(color);
+	line(x, y, x2, y2);
+}
+
+void Line::hide(){
+	setcolor(BLACK);
+	line(x, y, x2, y2);
+}
+
+void Line::rotate(int angle){
+	//this->hide();
+	int dx = x2 - x;
+	int dy = y2 - y;
+	xn = 
+}
+
+
+class Square : Line{
+	Square(int _x1, int _y1, int _x2, int _y2) : Line(_x1, _y1, _x2, _y2){}
+		
+	Square(Point p, int _x2, int _y2) : Line(p, _x2, _y2){}
+		
+	Square(int _x1, int _y1, int _x2, int _y2, int _color) : Line(_x1, _y1, _x2, _y2, _color) {		}
+		
+	void draw();
+	void hide();
+};
+
+/*
+void Square::draw(){ 
+	setcolor(color);
+	int dx = x2 - x;
+	int dy = y2 - y;
+	line(x, y, x + dx, y + dy);
+	line(x, y, x + 2 * dx, y + 2 * dy);
+	line(x, y, x, )
+}*/
+
+
+int main(){
+    int gddriver = DETECT, gmode, errorcode;
+    initgraph(&gddriver, &gmode, "");
+//THE WORKING SPACE
+	Point p1(100, 100, RED);
+	Line l1(p1, 250, 250);
+	l1.draw();
+	
+	
+//END OF THE WORKING ZONE
+    getch();
+    closegraph();
+    }
